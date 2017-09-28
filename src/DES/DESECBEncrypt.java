@@ -1,10 +1,9 @@
 package DES;
 import java.io.*;
 import javax.crypto.*;
-import javax.crypto.spec.*;
 
 
-public class DESCBCEncrypt
+public class DESECBEncrypt
 {
     /**
      * Encrypts message provided on command line and writes to file
@@ -29,16 +28,11 @@ public class DESCBCEncrypt
             keyOIS.close();
             keyFIS.close();
             
-            // set IV (required for CBC)
-            
-            byte[] iv ={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-            IvParameterSpec ips = new IvParameterSpec(iv);
-            
             // Create DES cipher instance
-            Cipher desCipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+            Cipher desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
             
             // Initialize the cipher for encryption
-            desCipher.init(Cipher.ENCRYPT_MODE, desKey, ips);
+            desCipher.init(Cipher.ENCRYPT_MODE, desKey);
             
             // File for writing output
             FileOutputStream fos = new FileOutputStream("scrambled");
